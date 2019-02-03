@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void openBuyer(View view) {
-        Intent i = new Intent(this, CS.class);
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
