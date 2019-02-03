@@ -5,34 +5,45 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/old_transactions"
+            android:icon="@drawable/oldtransactions"
+            android:title="Old Transactions" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/wishlist"
+            android:icon="@drawable/wishlist"
+            android:title="Wishlist" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/notification"
+            android:icon="@drawable/notifications"
+            android:title="Notifications" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
+            android:id="@+id/tnc"
+            android:icon="@drawable/terms_conditions"
+            android:title="Terms and Conditions" />
+        <item
+            android:id="@+id/feedback_form"
+            android:icon="@drawable/feedback"
+            android:title="Feedback Form" />
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+        <item
+            android:id="@+id/logout"
+            android:title = "Logout"
+            android:icon = "@drawable/logout"/>
+
+        <item
+             android:id = "@+id/bos"
+            android:title = "Buyer or Seller">
+
+            <menu android:checkableBehavior="single">
+                <item
+                    android:id = "@+id/buyer"
+                    android:title = "Buyer"/>
+
+                <item
+                    android:id = "@+id/seller"
+                    android:title = "Seller"/>
+            </menu>
+        </item>
+    </group>
 
 </menu>

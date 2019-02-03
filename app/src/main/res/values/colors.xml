@@ -3,4 +3,14 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="graylight">#fafafa</color>
+    <color name="startblue">#09c6df</color>
+    <color name="endblue">#0bcce6</color>
+
+    <color name="button_pressed">#ffffff</color>
+    <color name="button_focused">#ff0000ff</color>
+    <color name="button_default">#35e4ea</color>
+    <color name="insta">#c32aa3</color>
+    <color name="flipkart">#047bd5</color>
+    <color name ="common_google_signin_btn_text_dark_default">#000000</color>
 </resources>

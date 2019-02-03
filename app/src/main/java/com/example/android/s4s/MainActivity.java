@@ -1,19 +1,19 @@
 package com.example.android.s4s;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.view.View;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -25,10 +25,10 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TabLayout tabLayout = (TabLayout)findViewById(R.id.tabs);
-        ViewPager Pager = (ViewPager)findViewById(R.id.viewpager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        ViewPager Pager = (ViewPager) findViewById(R.id.viewpager);
 
-        tabpagerAdapter Tabpageradapter = new tabpagerAdapter(getSupportFragmentManager());
+        tabpagerAdapter Tabpageradapter = new tabpagerAdapter(getSupportFragmentManager(),MainActivity.this);
         Pager.setAdapter(Tabpageradapter);
         tabLayout.setupWithViewPager(Pager);
 
@@ -40,7 +40,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
+
 
     @Override
     public void onBackPressed() {
@@ -52,12 +55,8 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -66,31 +65,48 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) { //different pages
+        switch (item.getItemId()) {
+            case R.id.old_transactions:
+                Intent intent3 = new Intent(this, Old.class);
+                startActivity(intent3);
+                break;
+            case R.id.notification:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new com.example.android.s4s.Notifications()).commit();
+                break;
+            case R.id.tnc:
+                Intent intent1 = new Intent(this, TNC.class);
+                startActivity(intent1);
+                break;
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            case R.id.wishlist:
+                Intent intent6 = new Intent(this, Wishlist.class);
+                startActivity(intent6);
+                break;
+            case R.id.logout:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new com.example.android.s4s.Logout()).commit();
+                break;
+            case R.id.feedback_form:
+                Intent intent2 = new Intent(this, Feedback.class);
+                startActivity(intent2);
+                break;
 
-        } else if (id == R.id.nav_slideshow) {
+            case R.id.seller:
+                Intent intent4 = new Intent(this, Seller.class);
+                startActivity(intent4);
+                break;
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            case R.id.buyer:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
 
         }
 
@@ -98,4 +114,28 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void openProfile(View view) {
+        Intent intent = new Intent(this, Profile.class);
+        startActivity(intent);
+
+
+    }
+
+    public void openProfileEdit(View view) {
+        Intent i = new Intent(this, ProfileEdit.class);
+        startActivity(i);
+    }
+
+    public void openBuyer(View view) {
+        Intent i = new Intent(this, CS.class);
+        startActivity(i);
+    }
+
+
 }
+
+
+
+
+
