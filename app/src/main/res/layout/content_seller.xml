@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/seller"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MainActivity">
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="194dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="175dp"
+                android:layout_marginLeft="175dp"
+                android:layout_marginTop="76dp"
+                android:layout_marginEnd="42dp"
+                android:layout_marginRight="42dp"
+                android:layout_marginBottom="1199dp"
+                android:autofillHints="name of the book"
+                android:ems="10"
+                android:hint="@string/seller2"
+                android:inputType="text"
+                android:text="@string/seller2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="194dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="175dp"
+                android:layout_marginLeft="175dp"
+                android:layout_marginTop="133dp"
+                android:layout_marginEnd="42dp"
+                android:layout_marginRight="42dp"
+                android:layout_marginBottom="1142dp"
+                android:autofillHints="authors name"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="@string/seller2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="239dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="147dp"
+                android:layout_marginLeft="147dp"
+                android:layout_marginTop="550dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
+                android:layout_marginBottom="713dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="77dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1022dp"
+                android:text="@string/button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--<RadioButton-->
+            <!--android:id="@+id/radioButton"-->
+            <!--android:layout_width="346dp"-->
+            <!--android:layout_height="37dp"-->
+            <!--android:layout_marginStart="34dp"-->
+            <!--android:layout_marginLeft="34dp"-->
+            <!--android:layout_marginTop="521dp"-->
+            <!--android:layout_marginEnd="34dp"-->
+            <!--android:layout_marginRight="34dp"-->
+            <!--android:layout_marginBottom="173dp"-->
+            <!--android:duplicateParentState="true"-->
+            <!--android:text="@string/declare"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.333"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <EditText
+                android:id="@+id/editText3"
+                android:layout_width="194dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="175dp"
+                android:layout_marginLeft="175dp"
+                android:layout_marginTop="295dp"
+                android:layout_marginEnd="42dp"
+                android:layout_marginRight="42dp"
+                android:layout_marginBottom="980dp"
+                android:ems="10"
+                android:inputType="numberSigned|textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editText4"
+                android:layout_width="194dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="175dp"
+                android:layout_marginLeft="175dp"
+                android:layout_marginTop="188dp"
+                android:layout_marginEnd="42dp"
+                android:layout_marginRight="42dp"
+                android:layout_marginBottom="1087dp"
+                android:ems="10"
+                android:inputType="numberSigned"
+                android:text="@string/seller3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editText5"
+                android:layout_width="194dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="176dp"
+                android:layout_marginLeft="176dp"
+                android:layout_marginTop="236dp"
+                android:layout_marginEnd="42dp"
+                android:layout_marginRight="42dp"
+                android:layout_marginBottom="1039dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="201dp"
+                android:text="@string/sale"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="83dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="43dp"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="560dp"
+                android:layout_marginEnd="273dp"
+                android:layout_marginRight="273dp"
+                android:layout_marginBottom="719dp"
+                android:text="condition of the book"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/uploadfront"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="43dp"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="341dp"
+                android:layout_marginEnd="238dp"
+                android:layout_marginRight="238dp"
+                android:layout_marginBottom="834dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+            <ImageView
+                android:id="@+id/uploadback"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="219dp"
+                android:layout_marginLeft="219dp"
+                android:layout_marginTop="341dp"
+                android:layout_marginEnd="63dp"
+                android:layout_marginRight="63dp"
+                android:layout_marginBottom="834dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+            <Button
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="490dp"
+                android:layout_marginEnd="238dp"
+                android:layout_marginRight="238dp"
+                android:layout_marginBottom="793dp"
+                android:text="Upload Front page"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginStart="224dp"
+                android:layout_marginLeft="224dp"
+                android:layout_marginTop="490dp"
+                android:layout_marginEnd="70dp"
+                android:layout_marginRight="70dp"
+                android:layout_marginBottom="793dp"
+                android:text="upload back page"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:layout_marginStart="22dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="84dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
+                android:layout_marginBottom="1208dp"
+                android:text="Name of the book"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="141dp"
+                android:layout_marginEnd="37dp"
+                android:layout_marginRight="37dp"
+                android:layout_marginBottom="1150dp"
+                android:text="@string/sell"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editText2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="73dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="22dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="199dp"
+                android:layout_marginEnd="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="1086dp"
+                android:text="@string/str"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editText4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="249dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="1042dp"
+                android:text="@string/pub"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editText5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="303dp"
+                android:layout_marginEnd="36dp"
+                android:layout_marginRight="36dp"
+                android:layout_marginBottom="988dp"
+                android:text="@string/sa"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editText3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="1259dp"
+                android:contentDescription="@string/ss1"
+                android:text="@string/ss"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="682dp"
+                android:layout_marginBottom="18dp"
+                android:contentDescription="@string/s4"
+                android:text="Address"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textView13"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.492"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="123dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="730dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="536dp"
+                android:text="@string/ssss"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editText7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/editText7"
+                android:layout_width="194dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="181dp"
+                android:layout_marginLeft="181dp"
+                android:layout_marginTop="716dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="528dp"
+                android:ems="10"
+                android:inputType="textLongMessage"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.562" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="126dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="796dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/s1"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/editText8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editText8"
+                android:layout_width="194dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="181dp"
+                android:layout_marginLeft="181dp"
+                android:layout_marginTop="791dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:ems="10"
+                android:inputType="textLongMessage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="848dp"
+                android:layout_marginEnd="26dp"
+                android:layout_marginRight="26dp"
+                android:layout_marginBottom="443dp"
+                android:text="@string/s"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editText9"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/editText9"
+                android:layout_width="194dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="181dp"
+                android:layout_marginLeft="181dp"
+                android:layout_marginTop="844dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="425dp"
+                android:ems="10"
+                android:inputType="numberSigned"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="75dp"
+                android:layout_height="23dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="912dp"
+                android:layout_marginEnd="68dp"
+                android:layout_marginRight="68dp"
+                android:layout_marginBottom="380dp"
+                android:text="@string/sd"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editText10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/editText10"
+                android:layout_width="194dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="175dp"
+                android:layout_marginLeft="175dp"
+                android:layout_marginTop="901dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:ems="10"
+                android:inputType="textShortMessage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!--<Switch-->
+            <!--android:id="@+id/radioButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="13dp"-->
+            <!--android:layout_marginBottom="33dp"-->
+            <!--android:checked="true"-->
+            <!--android:text="@string/declare"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/button"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/editText3"-->
+            <!--tools:checked="true" />-->
+
+
+        </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>
