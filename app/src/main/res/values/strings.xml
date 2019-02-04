@@ -58,4 +58,15 @@
     <string name="title_activity_old">Old</string>
     <string name="title_activity_seller1">Seller1</string>
     <string name="title_activity_wishlist1">Wishlist1</string>
+    <string name="title_activity_addtocart">addtocart</string>
+
+    <string name="dialog_message1">Confirm</string>
+    <string name="dialog_message2">Cancel</string>
+    <string name="dialog_title">Payment</string>
+    <string-array name="country_arrays">
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    </string-array>
 </resources>

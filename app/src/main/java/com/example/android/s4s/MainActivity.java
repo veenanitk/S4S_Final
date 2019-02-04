@@ -11,8 +11,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 
 public class MainActivity extends AppCompatActivity
@@ -41,6 +43,24 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        final EditText search = (EditText) findViewById(R.id.search);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String Search=search.getText().toString();
+                if(TextUtils.isEmpty(Search)) {
+                    Intent intent = new Intent(MainActivity.this, SearchResults.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Intent intent = new Intent(MainActivity.this, SearchResults.class);
+                    startActivity(intent);
+
+                }
+            }
+        });
+
 
     }
 
@@ -48,11 +68,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        assert drawer!=null;
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        } else super.onBackPressed();
     }
 
 
@@ -129,6 +148,11 @@ public class MainActivity extends AppCompatActivity
 
     public void openBuyer(View view) {
         Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+    public void openPayment(View view)
+    {
+        Intent i = new Intent(this, payment.class);
         startActivity(i);
     }
 

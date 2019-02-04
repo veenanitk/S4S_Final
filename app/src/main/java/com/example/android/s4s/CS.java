@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -51,9 +50,11 @@ public class CS extends Fragment {
 
         BookAdapter adapter = new BookAdapter(getActivity(), books);
 
-        ListView listView = (ListView) v.findViewById(R.id.list);
+        final ListView listView = (ListView) v.findViewById(R.id.list);
+
 
         listView.setAdapter(adapter);
+
     }
 
 
