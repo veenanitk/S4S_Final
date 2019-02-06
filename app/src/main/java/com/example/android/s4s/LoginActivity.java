@@ -164,6 +164,18 @@ public class LoginActivity extends AppCompatActivity {
 
 
     /**
+     * openTerms() is evaluated when user clicks <u>terms</u>,
+     * Terms and conditions are displayed
+     *
+     * @param view
+     */
+    public void openTerms(View view) {
+        Intent i = new Intent(this, TermsActivity.class);
+        startActivity(i);
+    }
+
+
+    /**
      * To check the status of radio button
      *
      * @param view

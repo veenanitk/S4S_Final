@@ -1,6 +1,7 @@
 package com.example.android.s4s;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -46,8 +47,7 @@ public class Wishlist extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 finish();
-                                Toast.makeText(getApplicationContext(), "Order Placed!!",
-                                        Toast.LENGTH_SHORT).show();
+                                openPayment(findViewById(R.id.buyall));
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -74,5 +74,11 @@ public class Wishlist extends AppCompatActivity {
         if(item.getItemId()==android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
+    }
+
+    public void openPayment(View view)
+    {
+        Intent i = new Intent(Wishlist.this, payment.class);
+        startActivity(i);
     }
 }

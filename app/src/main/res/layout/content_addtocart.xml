@@ -88,6 +88,9 @@
             android:layout_gravity="center"
             android:background="@color/colorPrimary"
             android:text="BUY NOW"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"
+            />
     </LinearLayout>
 </ScrollView>

@@ -63,10 +63,16 @@
     <string name="dialog_message1">Confirm</string>
     <string name="dialog_message2">Cancel</string>
     <string name="dialog_title">Payment</string>
+    <string name="selleerrr">By clicking SUBMIT, you agree to our terms and condition</string>
     <string-array name="country_arrays">
-    <item>1</item>
-    <item>2</item>
-    <item>3</item>
-    <item>4</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
     </string-array>
+    <string name="title_activity_logout1">Logout1</string>
+    <string name="title_activity_notification">Notification</string>
+    <string name="title_activity_profile1">Profile1</string>
+    <string name="title_activity_profile_edit1">ProfileEdit1</string>
+    <string name="title_activity_comp_sci">CompSci</string>
 </resources>

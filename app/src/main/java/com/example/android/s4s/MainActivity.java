@@ -15,6 +15,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity
@@ -48,16 +49,11 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 String Search=search.getText().toString();
-                if(TextUtils.isEmpty(Search)) {
+                if(!TextUtils.isEmpty(Search)) {
                     Intent intent = new Intent(MainActivity.this, SearchResults.class);
                     startActivity(intent);
                 }
-                else
-                {
-                    Intent intent = new Intent(MainActivity.this, SearchResults.class);
-                    startActivity(intent);
 
-                }
             }
         });
 
@@ -98,10 +94,10 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent3);
                 break;
             case R.id.notification:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new com.example.android.s4s.Notifications()).commit();
-                break;
+                Intent intent7 = new Intent(this, Notification.class);
+                startActivity(intent7);                break;
             case R.id.tnc:
-                Intent intent1 = new Intent(this, TNC.class);
+                Intent intent1 = new Intent(this, TermsActivity.class);
                 startActivity(intent1);
                 break;
 
@@ -110,8 +106,8 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent6);
                 break;
             case R.id.logout:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new com.example.android.s4s.Logout()).commit();
-                break;
+                Intent intent8 = new Intent(this, LoginActivity.class);
+                startActivity(intent8);                break;
             case R.id.feedback_form:
                 Intent intent2 = new Intent(this, Feedback.class);
                 startActivity(intent2);
@@ -134,19 +130,20 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void openProfile(View view) {
-        Intent intent = new Intent(this, Profile.class);
+    public void openProfile1(View view) {
+        Intent intent = new Intent(MainActivity.this, Profile1.class);
         startActivity(intent);
-
-
     }
 
-    public void openProfileEdit(View view) {
-        Intent i = new Intent(this, ProfileEdit.class);
+    public void openProfileEdit1(View view) {
+        Intent i = new Intent(this, ProfileEdit1.class);
         startActivity(i);
     }
 
     public void openBuyer(View view) {
+
+        String mess = "Updated Successfully";
+        Toast.makeText(this, mess, Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }

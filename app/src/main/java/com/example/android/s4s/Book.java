@@ -8,7 +8,7 @@ public class Book {
 
     private String mPrice;
 
-    private String wish = "Wishlist";
+    private String wish = "Add";
 
     private int mgetBookImageId;
 

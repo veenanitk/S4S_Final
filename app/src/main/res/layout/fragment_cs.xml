@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:id="@+id/container"
     android:orientation="vertical"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    tools:context=".CS">
     <ListView
         android:id="@+id/list"
         android:orientation="vertical"
@@ -15,6 +16,9 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context=".CS"/>
+        tools:context=".CS"
+        android:clickable="true"
+        android:focusable="true"
+        />
 
 </LinearLayout>

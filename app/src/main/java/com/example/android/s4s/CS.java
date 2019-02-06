@@ -1,11 +1,13 @@
 package com.example.android.s4s;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -34,6 +36,8 @@ public class CS extends Fragment {
         return v;
     }
 
+
+
     @Override
     public void onStop() {
         super.onStop();
@@ -41,21 +45,32 @@ public class CS extends Fragment {
 
     public void perform(View v) {
 
-        ArrayList<Book> books = new ArrayList<Book>();
+         ArrayList<Book> books = new ArrayList<Book>();
         for(int i = 0;i<10;i++)
         {
-            books.add(new Book("The Lost Symbol","Dan Brown", "Rs.500", "Wishlist",R.drawable.ic_menu_gallery,R.drawable.book_ratings,R.drawable.ic_add_shopping_cart));
+            books.add(new Book("The Lost Symbol","Dan Brown", "Rs.500", "Add",R.drawable.ic_menu_gallery,R.drawable.book_ratings,R.drawable.ic_add_shopping_cart));
         }
 
 
         BookAdapter adapter = new BookAdapter(getActivity(), books);
 
-        final ListView listView = (ListView) v.findViewById(R.id.list);
+         ListView listView = (ListView) v.findViewById(R.id.list);
 
 
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(getContext(),addtocart.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
+
 
 
 
