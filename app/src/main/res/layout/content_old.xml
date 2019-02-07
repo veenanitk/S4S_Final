@@ -1,11 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Old"
-    tools:showIn="@layout/activity_old">
+    tools:context=".Old">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".Old">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="124dp"
+            android:text="There's no going back!\nDo you still want to cancel this order?\n"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textStyle="bold|normal"
+            tools:layout_editor_absoluteX="163dp"
+            tools:layout_editor_absoluteY="164dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="351dp"
+            android:text="(order details here)"
+            android:textSize="18dp" />
+
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="263dp"
+            android:layout_marginRight="32dp"
+            android:ems="10"
+            android:hint="Reason to cancel"
+            android:inputType="textMultiLine"
+            tools:layout_marginStart="32dp" />
+
+
+        <Button
+            android:id="@+id/buttonold"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_below="@id/editText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="142dp"
+            android:layout_marginBottom="93dp"
+            android:text="proceed" />
+
+
+    </RelativeLayout>
+</ScrollView>

@@ -2,6 +2,7 @@ package com.example.android.s4s;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    private Boolean exit = false;
 
     @Override
     public void onBackPressed() {
@@ -67,8 +69,31 @@ public class MainActivity extends AppCompatActivity
         assert drawer!=null;
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else super.onBackPressed();
+        }
+        else
+        {
+            if (exit) {
+                Intent a = new Intent(Intent.ACTION_MAIN);
+                a.addCategory(Intent.CATEGORY_HOME);
+                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(a); // finish activity
+            } else {
+                Toast.makeText(this, "Press Back again to Exit.",
+                        Toast.LENGTH_SHORT).show();
+                exit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        exit = false;
+                    }
+                }, 3 * 1000);
+
+            }
+
+        }
     }
+
+
 
 
 

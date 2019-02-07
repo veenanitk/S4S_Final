@@ -2,6 +2,7 @@ package com.example.android.s4s;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -91,7 +93,7 @@ public class RegistrationActivity extends AppCompatActivity {
         matcher = pattern.matcher(phone);
 
         return matcher.matches();
-       // return (!TextUtils.isEmpty(phone) && Patterns.PHONE.matcher(phone).matches());
+        // return (!TextUtils.isEmpty(phone) && Patterns.PHONE.matcher(phone).matches());
     }
 
     /**
@@ -123,7 +125,7 @@ public class RegistrationActivity extends AppCompatActivity {
          */
         if (isEmpty(name)) {
             name.setError("Name is required!");
-            valid  = false;
+            valid = false;
         }
 
         /**
@@ -159,9 +161,8 @@ public class RegistrationActivity extends AppCompatActivity {
             valid = false;
         }
 
-        if(valid)
-        {
-            Intent i = new Intent(this,MainActivity.class);
+        if (valid) {
+            Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
     }
@@ -203,4 +204,29 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
 
+    private Boolean exit = false;
+
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a); // finish activity
+        }
+        else
+            {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
+
+    }
 }

@@ -2,6 +2,7 @@ package com.example.android.s4s;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -100,9 +102,9 @@ public class LoginActivity extends AppCompatActivity {
          */
         login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)  {
+            public void onClick(View view) {
 
-                 checkDataEntered();
+                checkDataEntered();
             }
         });
     }
@@ -152,11 +154,10 @@ public class LoginActivity extends AppCompatActivity {
 
         if (password.getText().toString().length() < 8 && !isValidPassword(password.getText().toString())) {
             password.setError("Enter valid password!");
-            valid =  false;
+            valid = false;
         }
 
-        if(valid)
-        {
+        if (valid) {
             Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
@@ -196,6 +197,30 @@ public class LoginActivity extends AppCompatActivity {
                 if (checked) {
                     break;
                 }
+        }
+    }
+
+
+    private Boolean exit = false;
+
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a); // finish activity
+        } else {
+            Toast.makeText(this, "Press Back again to Exit.",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
         }
     }
 }
