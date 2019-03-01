@@ -39,4 +39,9 @@
 
     <style name="HiddenTitleTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">#35e4ea</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
 </resources>

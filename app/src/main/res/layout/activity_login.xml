@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#e2e0e0"
+            android:background="@color/flipkart"
             android:orientation="vertical">
 
             <TextView
@@ -95,39 +95,54 @@
                             android:onClick="onRadioButtonClicked"
                             android:text="@string/loginalreadymember" />
 
-                        <EditText
-                            android:id="@+id/email_login_text_view"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/layout_login_email"
+                            style="@style/TextInputLayoutStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="16dp"
-                            android:background="@drawable/back"
-                            android:drawableStart="@drawable/emailicon"
-                            android:drawableLeft="@drawable/emailicon"
-                            android:drawablePadding="5dp"
-                            android:hint="@string/email"
-                            android:inputType="textEmailAddress"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/darker_gray" />
+                            android:hint="@string/email">
 
+                            <EditText
+                                android:id="@+id/email_login_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/back"
+                                android:drawableStart="@drawable/emailicon"
+                                android:drawableLeft="@drawable/emailicon"
+                                android:drawablePadding="5dp"
+                                android:inputType="textEmailAddress"
+                                android:textColor="@android:color/black"
+                                android:textColorHint="@android:color/darker_gray" />
 
-                        <EditText
-                            android:id="@+id/password_login_text_view"
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/layout_login_password"
+                            style="@style/TextInputLayoutStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="16dp"
-                            android:background="@drawable/back"
-                            android:drawableStart="@drawable/passwordicon"
-                            android:drawableLeft="@drawable/passwordicon"
-                            android:drawablePadding="5dp"
                             android:hint="@string/password"
-                            android:inputType="textPassword"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/darker_gray" />
+                            app:passwordToggleEnabled="true"
+                            app:passwordToggleTint="@android:color/darker_gray">
 
+                            <EditText
+                                android:id="@+id/password_login_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/back"
+                                android:drawableStart="@drawable/passwordicon"
+                                android:drawableLeft="@drawable/passwordicon"
+                                android:drawablePadding="5dp"
+                                android:inputType="textPassword"
+                                android:textColor="@android:color/black"
+                                android:textColorHint="@android:color/darker_gray" />
+                        </android.support.design.widget.TextInputLayout>
 
                         <Button
                             android:id="@+id/login_button"
@@ -218,31 +233,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/terms_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/terms"
-                    android:textColor="@android:color/darker_gray" />
-
-                <TextView
-                    android:id="@+id/terms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="8dp"
-                    android:onClick="openTerms"
-                    android:text="@string/terms2"
-                    android:textColor="@android:color/holo_blue_light" />
-
-            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

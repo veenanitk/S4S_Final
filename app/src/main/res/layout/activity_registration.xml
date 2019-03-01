@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#e2e0e0"
+            android:background="@color/flipkart"
             android:orientation="vertical">
 
             <TextView
@@ -28,7 +28,7 @@
                 android:fontFamily="@font/almendra_bold"
                 android:text="@string/bookpalace"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000000" />
+                android:textColor="#ffffff" />
         </LinearLayout>
 
         <View
@@ -80,87 +80,125 @@
                             android:onClick="onRadioButtonClicked"
                             android:text="@string/createaccount" />
 
-                        <EditText
-                            android:id="@+id/name_text_view"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/layout_name"
+                            style="@style/TextInputLayoutStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
-                            android:background="@drawable/back"
-                            android:drawableStart="@drawable/nameicon"
-                            android:drawableLeft="@drawable/nameicon"
-                            android:drawablePadding="5dp"
-                            android:hint="@string/name"
-                            android:inputType="textPersonName|textCapWords"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/darker_gray" />
+                            android:hint="@string/name">
 
+                            <EditText
+                                android:id="@+id/name_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/back"
+                                android:drawableStart="@drawable/nameicon"
+                                android:drawableLeft="@drawable/nameicon"
+                                android:drawablePadding="5dp"
+                                android:inputType="textPersonName|textCapWords"
+                                android:textColor="@android:color/black"
+                                android:textColorHint="@android:color/darker_gray" />
+                        </android.support.design.widget.TextInputLayout>
 
-                        <EditText
-                            android:id="@+id/email_text_view"
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/layout_email"
+                            style="@style/TextInputLayoutStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
-                            android:background="@drawable/back"
-                            android:drawableStart="@drawable/emailicon"
-                            android:drawableLeft="@drawable/emailicon"
-                            android:drawablePadding="5dp"
-                            android:hint="@string/email"
-                            android:inputType="textEmailAddress"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/darker_gray" />
+                            android:hint="@string/email">
 
-                        <EditText
-                            android:id="@+id/phone_text_view"
+                            <EditText
+                                android:id="@+id/email_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/back"
+                                android:drawableStart="@drawable/emailicon"
+                                android:drawableLeft="@drawable/emailicon"
+                                android:drawablePadding="5dp"
+                                android:inputType="textEmailAddress"
+                                android:textColor="@android:color/black"
+                                android:textColorHint="@android:color/darker_gray" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/layout_phone"
+                            style="@style/TextInputLayoutStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
-                            android:background="@drawable/back"
-                            android:drawableStart="@drawable/phoneicon"
-                            android:drawableLeft="@drawable/phoneicon"
-                            android:drawablePadding="5dp"
-                            android:hint="@string/phone"
-                            android:inputType="number"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/darker_gray" />
+                            android:hint="@string/phone">
 
-                        <EditText
-                            android:id="@+id/password_text_view"
+                            <EditText
+                                android:id="@+id/phone_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/back"
+                                android:drawableStart="@drawable/phoneicon"
+                                android:drawableLeft="@drawable/phoneicon"
+                                android:drawablePadding="5dp"
+                                android:inputType="number"
+                                android:textColor="@android:color/black"
+                                android:textColorHint="@android:color/darker_gray" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/layout_password"
+                            style="@style/TextInputLayoutStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
-                            android:background="@drawable/back"
-                            android:drawableStart="@drawable/passwordicon"
-                            android:drawableLeft="@drawable/passwordicon"
-                            android:drawablePadding="5dp"
                             android:hint="@string/password"
-                            android:inputType="textPassword"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/darker_gray" />
+                            app:passwordToggleEnabled="true"
+                            app:passwordToggleTint="@android:color/darker_gray">
 
 
-                        <EditText
-                            android:id="@+id/confirm_password_text_view"
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/password_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/back"
+                                android:drawableStart="@drawable/passwordicon"
+                                android:drawableLeft="@drawable/passwordicon"
+                                android:drawablePadding="5dp"
+                                android:inputType="textPassword"
+                                android:textColor="@android:color/black"
+                                android:textColorHint="@android:color/darker_gray" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/layout_confirm"
+                            style="@style/TextInputLayoutStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginRight="8dp"
-                            android:background="@drawable/back"
-                            android:drawableStart="@drawable/passwordicon"
-                            android:drawableLeft="@drawable/passwordicon"
-                            android:drawablePadding="5dp"
                             android:hint="@string/confirm"
-                            android:inputType="textPassword"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/darker_gray" />
+                            app:passwordToggleEnabled="true"
+                            app:passwordToggleTint="@android:color/darker_gray">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/confirm_password_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/back"
+                                android:drawableStart="@drawable/passwordicon"
+                                android:drawableLeft="@drawable/passwordicon"
+                                android:drawablePadding="5dp"
+                                android:inputType="textPassword"
+                                android:textColor="@android:color/black"
+                                android:textColorHint="@android:color/darker_gray" />
+                        </android.support.design.widget.TextInputLayout>
 
 
                         <Button

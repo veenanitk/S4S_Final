@@ -3,8 +3,11 @@ package com.example.android.s4s;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     EditText email;
     EditText password;
+    TextInputLayout email_layout,password_layout;
     Button login;
     LoginButton loginButton;
     CallbackManager callbackManager;
@@ -94,7 +98,10 @@ public class LoginActivity extends AppCompatActivity {
          */
         email = (EditText) findViewById(R.id.email_login_text_view);
         password = (EditText) findViewById(R.id.password_login_text_view);
+        email_layout = (TextInputLayout) findViewById(R.id.layout_login_email);
+        password_layout = (TextInputLayout) findViewById(R.id.layout_login_password);
         login = (Button) findViewById(R.id.login_button);
+
 
         /**
          * When login button is clicked ,
@@ -125,18 +132,13 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * To  check the validation of Password
      *
-     * @param password
+     * @param text
      * @return '1' if valid '0' if not valid
      */
-    public static boolean isValidPassword(final String password) {
+    public static boolean isValidPassword(EditText text) {
 
-        Pattern pattern;
-        Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(password);
-
-        return matcher.matches();
+        CharSequence password = text.getText().toString();
+        return password.length() >= 8;
 
     }
 
@@ -147,15 +149,18 @@ public class LoginActivity extends AppCompatActivity {
         boolean valid = true;
 
         if (isEmail(email) == false) {
-            email.setError("Enter valid email!");
-            valid = false;
-
-        }
-
-        if (password.getText().toString().length() < 8 && !isValidPassword(password.getText().toString())) {
-            password.setError("Enter valid password!");
+            email_layout.setError("Enter valid email!");
             valid = false;
         }
+        else
+            email_layout.setError(null);
+
+        if (isValidPassword(password) == false) {
+            password_layout.setError("Password must be at least 8 characters!");
+            valid = false;
+        }
+        else
+            password_layout.setError(null);
 
         if (valid) {
             Intent i = new Intent(this, MainActivity.class);

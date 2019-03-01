@@ -3,8 +3,12 @@ package com.example.android.s4s;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +30,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText phone;
     EditText password;
     EditText confirmpassword;
+    TextInputLayout name_layout, email_layout, phone_layout, password_layout, confirm_layout;
     Button register;
 
     @Override
@@ -36,12 +41,90 @@ public class RegistrationActivity extends AppCompatActivity {
         /**
          * Declaration and linking of views
          */
-        name = (EditText) findViewById(R.id.name_text_view);
-        email = (EditText) findViewById(R.id.email_text_view);
-        phone = (EditText) findViewById(R.id.phone_text_view);
-        password = (EditText) findViewById(R.id.password_text_view);
-        confirmpassword = (EditText) findViewById(R.id.confirm_password_text_view);
-        register = (Button) findViewById(R.id.register_button);
+        name = findViewById(R.id.name_text_view);
+        email = findViewById(R.id.email_text_view);
+        phone = findViewById(R.id.phone_text_view);
+        password = findViewById(R.id.password_text_view);
+        confirmpassword = findViewById(R.id.confirm_password_text_view);
+        name_layout = findViewById(R.id.layout_name);
+        email_layout = findViewById(R.id.layout_email);
+        phone_layout = findViewById(R.id.layout_phone);
+        password_layout = findViewById(R.id.layout_password);
+        confirm_layout = findViewById(R.id.layout_confirm);
+        register = findViewById(R.id.register_button);
+
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (isEmpty(name)) {
+                        name_layout.setError("Name is required!");
+                    } else
+                        name_layout.setError(null);
+                }
+            }
+        });
+
+        email.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (isEmail(email) == false) {
+                        email_layout.setError("Enter valid email!");
+                    } else
+                        email_layout.setError(null);
+                }
+            }
+        });
+
+        phone.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (isValidMobile(phone) == false) {
+                        phone_layout.setError("Phone Number must have 10 digits!");
+                    } else
+                        phone_layout.setError(null);
+                }
+            }
+        });
+
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (isValidPassword(password) == false) {
+                        password_layout.setError("Password must be at least 8 characters!");
+                    } else
+                        password_layout.setError(null);
+                }
+            }
+        });
+
+        confirmpassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    if (!password.getText().toString().equals(confirmpassword.getText().toString())) {
+                        confirm_layout.setError("Password did not match!");
+                    } else
+                        confirm_layout.setError(null);
+                }
+            }
+        });
+
+
+        /** name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        @Override public void onFocusChange(View v, boolean hasFocus) {
+        if (!hasFocus) {
+        if (isEmpty(name)) {
+        name_layout.setError("Name is required!");
+        valid = false;
+        } else
+        name_layout.setError(null);
+        }
+        }
+        }); **/
 
         /**
          * When register button is clicked ,
@@ -55,6 +138,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
     }
+
 
     /**
      * To check the validation of Email address
@@ -86,32 +170,19 @@ public class RegistrationActivity extends AppCompatActivity {
      */
     private boolean isValidMobile(EditText text) {
         CharSequence phone = text.getText().toString();
-        Pattern pattern;
-        Matcher matcher;
-        final String PHONE_PATTERN = "/[2-9]{2}\\d{8}/";
-        pattern = Pattern.compile(PHONE_PATTERN);
-        matcher = pattern.matcher(phone);
+        return phone.length() == 10;
 
-        return matcher.matches();
-        // return (!TextUtils.isEmpty(phone) && Patterns.PHONE.matcher(phone).matches());
     }
 
     /**
      * To  check the validation of Password
      *
-     * @param password
+     * @param text
      * @return '1' if valid '0' if not valid
      */
-    public static boolean isValidPassword(final String password) {
-
-        Pattern pattern;
-        Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{4,}$";
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(password);
-
-        return matcher.matches();
-
+    public static boolean isValidPassword(EditText text) {
+        CharSequence password = text.getText().toString();
+        return password.length() >= 8;
     }
 
     /**
@@ -124,45 +195,52 @@ public class RegistrationActivity extends AppCompatActivity {
          * Error display for invalid name
          */
         if (isEmpty(name)) {
-            name.setError("Name is required!");
+            name_layout.setError("Name is required!");
             valid = false;
-        }
+        } else
+            name_layout.setError(null);
 
         /**
          * Error display for invalid email
          */
         if (isEmail(email) == false) {
-            email.setError("Enter valid email!");
+            email_layout.setError("Enter valid email!");
             valid = false;
-        }
+        } else
+            email_layout.setError(null);
 
         /**
          * Error display for invalid phone
          */
-        if (phone.getText().toString().length() != 10 && !isValidMobile(phone)) {
-            phone.setError("Phone Number must have 10 digits!");
+        if (isValidMobile(phone) == false) {
+            phone_layout.setError("Phone Number must have 10 digits!");
             valid = false;
-        }
+        } else
+            phone_layout.setError(null);
 
         /**
          * Error display for invalid password
          */
-        if (password.getText().toString().length() < 8 && !isValidPassword(password.getText().toString())) {
-            password.setError("Password must be at least 8 characters!");
+        if (isValidPassword(password) == false) {
+            password_layout.setError("Password must be at least 8 characters!");
             valid = false;
-        }
+        } else
+            password_layout.setError(null);
 
         /**
          * Password entered in confirm password view is checked for a match ,
          * with already entered password
          */
         if (!password.getText().toString().equals(confirmpassword.getText().toString())) {
-            confirmpassword.setError("Password did not match!");
+            confirm_layout.setError("Password did not match!");
             valid = false;
-        }
+        } else
+            confirm_layout.setError(null);
 
         if (valid) {
-            Intent i = new Intent(this, MainActivity.class);
+            Toast.makeText(this, "Registration Successful",
+                    Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(this, LoginActivity.class);
             startActivity(i);
         }
     }
@@ -213,9 +291,7 @@ public class RegistrationActivity extends AppCompatActivity {
             a.addCategory(Intent.CATEGORY_HOME);
             a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(a); // finish activity
-        }
-        else
-            {
+        } else {
             Toast.makeText(this, "Press Back again to Exit.",
                     Toast.LENGTH_SHORT).show();
             exit = true;
