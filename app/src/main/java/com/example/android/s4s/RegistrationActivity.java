@@ -3,6 +3,7 @@ package com.example.android.s4s;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,6 +40,10 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText confirmpassword;
     TextInputLayout name_layout, email_layout, phone_layout, password_layout, confirm_layout;
     Button register;
+
+    private FirebaseDatabase database;
+    private DatabaseReference Ref_name, Ref_email, Ref_phone, Ref_password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +64,13 @@ public class RegistrationActivity extends AppCompatActivity {
         password_layout = findViewById(R.id.layout_password);
         confirm_layout = findViewById(R.id.layout_confirm);
         register = findViewById(R.id.register_button);
+
+        database = FirebaseDatabase.getInstance();
+        Ref_name = database.getReference().child("name");
+        Ref_email = database.getReference().child("email");
+        Ref_phone = database.getReference().child("phone");
+        Ref_password = database.getReference().child("password");
+
 
         name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -134,8 +153,13 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkDataEntered();
+                Ref_name.push().setValue(name.getText().toString());
+                Ref_email.push().setValue(email.getText().toString());
+                Ref_phone.push().setValue(phone.getText().toString());
+                Ref_password.push().setValue(password.getText().toString());
             }
         });
+
 
     }
 
@@ -305,4 +329,6 @@ public class RegistrationActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

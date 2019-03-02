@@ -25,6 +25,7 @@ import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONObject;
 
@@ -41,6 +42,9 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     LoginButton loginButton;
     CallbackManager callbackManager;
+    //firebase auth object
+    private FirebaseAuth firebaseAuth;
+
 
 
     @Override
@@ -156,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
             email_layout.setError(null);
 
         if (isValidPassword(password) == false) {
-            password_layout.setError("Password must be at least 8 characters!");
+            password_layout.setError("Enter Valid Password!");
             valid = false;
         }
         else
