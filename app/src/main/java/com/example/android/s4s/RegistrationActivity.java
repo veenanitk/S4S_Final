@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -147,10 +148,30 @@ public class RegistrationActivity extends AppCompatActivity {
                 Ref_email.push().setValue(email.getText().toString());
                 Ref_phone.push().setValue(phone.getText().toString());
                 Ref_password.push().setValue(password.getText().toString());
+                sendEmailVerification();
             }
         });
 
+    }
 
+    public void sendEmailVerification() {
+        // [START send_email_verification]
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        FirebaseUser user = auth.getCurrentUser();
+
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            //Log.d(TAG, "Email sent.");
+                            Toast.makeText(RegistrationActivity.this, "Email Sent.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+        // [END send_email_verification]
     }
 
 
@@ -165,7 +186,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     private void createAccount(String email, String password) {
-       // Log.d(TAG, "createAccount:" + email);
+        // Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
             return;
         }
@@ -178,7 +199,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                           // Log.d(TAG, "createUserWithEmail:success");
+                            // Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(RegistrationActivity.this, "Registration Successful",
                                     Toast.LENGTH_SHORT).show();

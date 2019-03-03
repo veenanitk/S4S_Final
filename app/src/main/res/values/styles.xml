@@ -44,6 +44,10 @@
         <item name="boxStrokeWidth">2dp</item>
     </style>
 
-
+    <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:textSize">10sp</item>
+    </style>
 
 </resources>

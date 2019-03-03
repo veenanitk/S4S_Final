@@ -1,5 +1,7 @@
 package com.example.android.s4s;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,10 +13,13 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -45,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     EditText mEmailField;
     EditText mPasswordField;
+    TextView forgot_password;
     TextInputLayout email_layout, password_layout;
     Button login;
     LoginButton loginButton;
@@ -114,9 +120,54 @@ public class LoginActivity extends AppCompatActivity {
          */
         mEmailField = findViewById(R.id.email_login_text_view);
         mPasswordField = findViewById(R.id.password_login_text_view);
-        email_layout = (TextInputLayout) findViewById(R.id.layout_login_email);
-        password_layout = (TextInputLayout) findViewById(R.id.layout_login_password);
-        login = (Button) findViewById(R.id.login_button);
+        email_layout = findViewById(R.id.layout_login_email);
+        password_layout = findViewById(R.id.layout_login_password);
+        login = findViewById(R.id.login_button);
+        forgot_password = findViewById(R.id.forgot_password);
+
+
+        forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get prompts.xml view
+                LayoutInflater li = LayoutInflater.from(LoginActivity.this);
+                View promptsView = li.inflate(R.layout.prompts, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        new ContextThemeWrapper(LoginActivity.this, R.style.AlertDialogCustom));
+
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder.setView(promptsView);
+
+                final EditText userInput = (EditText) promptsView
+                        .findViewById(R.id.editTextDialogUserInput);
+
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        // get user input and set it to result
+                                        // edit text
+                                        sendPasswordReset(userInput.getText().toString());
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+
+            }
+        });
 
 
         /**
@@ -129,6 +180,25 @@ public class LoginActivity extends AppCompatActivity {
                 signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
             }
         });
+    }
+
+    public void sendPasswordReset(String email) {
+        // [START send_password_reset]
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        String emailAddress = email;
+
+        auth.sendPasswordResetEmail(emailAddress)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // Log.d(TAG, "Email sent.");
+                            Toast.makeText(LoginActivity.this, "Reset Password Sent.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        // [END send_password_reset]
     }
 
     // [START on_start_check_user]
