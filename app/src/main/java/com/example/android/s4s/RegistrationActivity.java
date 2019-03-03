@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -42,6 +43,7 @@ public class RegistrationActivity extends AppCompatActivity {
     Button register;
 
     private FirebaseDatabase database;
+    private FirebaseAuth mAuth;
     private DatabaseReference Ref_name, Ref_email, Ref_phone, Ref_password;
 
 
@@ -66,6 +68,7 @@ public class RegistrationActivity extends AppCompatActivity {
         register = findViewById(R.id.register_button);
 
         database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         Ref_name = database.getReference().child("name");
         Ref_email = database.getReference().child("email");
         Ref_phone = database.getReference().child("phone");
@@ -132,19 +135,6 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-
-        /** name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-        @Override public void onFocusChange(View v, boolean hasFocus) {
-        if (!hasFocus) {
-        if (isEmpty(name)) {
-        name_layout.setError("Name is required!");
-        valid = false;
-        } else
-        name_layout.setError(null);
-        }
-        }
-        }); **/
-
         /**
          * When register button is clicked ,
          * checkDataEntered() is evaluated
@@ -152,7 +142,7 @@ public class RegistrationActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkDataEntered();
+                createAccount(email.getText().toString(), password.getText().toString());
                 Ref_name.push().setValue(name.getText().toString());
                 Ref_email.push().setValue(email.getText().toString());
                 Ref_phone.push().setValue(phone.getText().toString());
@@ -164,56 +154,52 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * To check the validation of Email address
-     *
-     * @param text
-     * @return '1' for accepted email and '0' for not accepted email
-     */
-    private boolean isEmail(EditText text) {
-        CharSequence email = text.getText().toString();
-        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    // [START on_start_check_user]
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
     }
+    // [END on_start_check_user]
 
-    /**
-     * To Check if EditText View is empty
-     *
-     * @param text
-     * @return '1' for empty and '0' for not empty
-     */
-    private boolean isEmpty(EditText text) {
-        CharSequence str = text.getText().toString();
-        return TextUtils.isEmpty(str);
-    }
 
-    /**
-     * To check the validation of Phone Number
-     *
-     * @param text
-     * @return '1' if valid '0' if not valid
-     */
-    private boolean isValidMobile(EditText text) {
-        CharSequence phone = text.getText().toString();
-        return phone.length() == 10;
+    private void createAccount(String email, String password) {
+       // Log.d(TAG, "createAccount:" + email);
+        if (!validateForm()) {
+            return;
+        }
 
-    }
 
-    /**
-     * To  check the validation of Password
-     *
-     * @param text
-     * @return '1' if valid '0' if not valid
-     */
-    public static boolean isValidPassword(EditText text) {
-        CharSequence password = text.getText().toString();
-        return password.length() >= 8;
+        // [START create_user_with_email]
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                           // Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(RegistrationActivity.this, "Registration Successful",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
+                            startActivity(i);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            //Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(RegistrationActivity.this, "Registration failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+        // [END create_user_with_email]
     }
 
     /**
      * To check the validity of all the views
      */
-    void checkDataEntered() {
-
+    private boolean validateForm() {
         boolean valid = true;
         /**
          * Error display for invalid name
@@ -261,12 +247,52 @@ public class RegistrationActivity extends AppCompatActivity {
         } else
             confirm_layout.setError(null);
 
-        if (valid) {
-            Toast.makeText(this, "Registration Successful",
-                    Toast.LENGTH_SHORT).show();
-            Intent i = new Intent(this, LoginActivity.class);
-            startActivity(i);
-        }
+        return valid;
+    }
+
+    /**
+     * To check the validation of Email address
+     *
+     * @param text
+     * @return '1' for accepted email and '0' for not accepted email
+     */
+    private boolean isEmail(EditText text) {
+        CharSequence email = text.getText().toString();
+        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
+    }
+
+    /**
+     * To Check if EditText View is empty
+     *
+     * @param text
+     * @return '1' for empty and '0' for not empty
+     */
+    private boolean isEmpty(EditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
+    }
+
+    /**
+     * To check the validation of Phone Number
+     *
+     * @param text
+     * @return '1' if valid '0' if not valid
+     */
+    private boolean isValidMobile(EditText text) {
+        CharSequence phone = text.getText().toString();
+        return phone.length() == 10;
+
+    }
+
+    /**
+     * To  check the validation of Password
+     *
+     * @param text
+     * @return '1' if valid '0' if not valid
+     */
+    public static boolean isValidPassword(EditText text) {
+        CharSequence password = text.getText().toString();
+        return password.length() >= 8;
     }
 
     /**
