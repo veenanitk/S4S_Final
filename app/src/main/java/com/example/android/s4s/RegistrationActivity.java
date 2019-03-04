@@ -148,30 +148,9 @@ public class RegistrationActivity extends AppCompatActivity {
                 Ref_email.push().setValue(email.getText().toString());
                 Ref_phone.push().setValue(phone.getText().toString());
                 Ref_password.push().setValue(password.getText().toString());
-                sendEmailVerification();
             }
         });
 
-    }
-
-    public void sendEmailVerification() {
-        // [START send_email_verification]
-        FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
-
-        user.sendEmailVerification()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            //Log.d(TAG, "Email sent.");
-                            Toast.makeText(RegistrationActivity.this, "Email Sent.",
-                                    Toast.LENGTH_SHORT).show();
-
-                        }
-                    }
-                });
-        // [END send_email_verification]
     }
 
 
@@ -203,6 +182,20 @@ public class RegistrationActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(RegistrationActivity.this, "Registration Successful",
                                     Toast.LENGTH_SHORT).show();
+                            // [START send_email_verification]
+                            user.sendEmailVerification()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                //Log.d(TAG, "Email sent.");
+                                                Toast.makeText(RegistrationActivity.this, "Email Sent.",
+                                                        Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        }
+                                    });
+                            // [END send_email_verification]
                             Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
                             startActivity(i);
                         } else {
