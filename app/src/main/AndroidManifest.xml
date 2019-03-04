@@ -70,12 +70,15 @@
             </intent-filter>
         </activity>
 
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/actions" />
+
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -96,6 +99,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".SearchResults"
             android:label="Search Results" />

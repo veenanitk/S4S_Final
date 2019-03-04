@@ -36,8 +36,8 @@
     <string name="login">Login</string>
     <string name="notmember">Don\'t have an account?</string>
     <string name="forgotpassword"><u>Forgot Password?</u></string>
-    <string name="facebook_app_id">1004399493092652</string>
-    <string name="fb_login_protocol_scheme">fb1004399493092652</string>
+    <string name="facebook_app_id">561557834349920</string>
+    <string name="fb_login_protocol_scheme">fb561557834349920</string>
     <string name="signup"><b>Sign Up</b></string>
     <string name="bookpalace"><b>Book Palace</b></string>
     <string name="createaccount"><b>Create account.</b> New to Book Palace?</string>
@@ -75,7 +75,5 @@
     <string name="title_activity_profile1">Profile1</string>
     <string name="title_activity_profile_edit1">ProfileEdit1</string>
     <string name="title_activity_comp_sci">CompSci</string>
-
-
 
 </resources>

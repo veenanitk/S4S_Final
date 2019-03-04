@@ -22,28 +22,40 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
 public class LoginActivity extends AppCompatActivity {
+
 
     /**
      * Declaration
@@ -59,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     // [END declare_auth]
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,50 +81,76 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
 
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        // Build a GoogleSignInClient with the options specified by gso.
-        GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
 
         /**
          * email and public_profile can be read from facebook,
          * on clicking facebook login button
          */
-        loginButton = (LoginButton) findViewById(R.id.login_button_fb);
+        loginButton = findViewById(R.id.login_button_fb);
         loginButton.setReadPermissions("email", "public_profile");
+
+
 
         /**
          * Sign-in is continued with facebook
          */
         callbackManager = CallbackManager.Factory.create();
+
+
+        // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                String userid = loginResult.getAccessToken().getUserId();
-
-                GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-
-                    }
-                });
+                // App code
+                Toast.makeText(LoginActivity.this, "Facebook Login Successful",
+                        Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(i);
             }
 
             @Override
             public void onCancel() {
-
+                // App code
+                Toast.makeText(LoginActivity.this, "Facebook Login Cancelled",
+                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onError(FacebookException error) {
-
+            public void onError(FacebookException exception) {
+                // App code
+                Toast.makeText(LoginActivity.this, "Facebook Login Error",
+                        Toast.LENGTH_SHORT).show();
             }
         });
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        // App code
+                        Toast.makeText(LoginActivity.this, "Facebook Login Successful",
+                                Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(i);
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        // App code
+                        Toast.makeText(LoginActivity.this, "Facebook Login Cancelled",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        // App code
+                        Toast.makeText(LoginActivity.this, "Facebook Login Error",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
 
         /**
          * Declaration and linking of views
@@ -124,7 +161,6 @@ public class LoginActivity extends AppCompatActivity {
         password_layout = findViewById(R.id.layout_login_password);
         login = findViewById(R.id.login_button);
         forgot_password = findViewById(R.id.forgot_password);
-
 
         forgot_password.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,6 +218,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     public void sendPasswordReset(String email) {
         // [START send_password_reset]
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -215,7 +257,6 @@ public class LoginActivity extends AppCompatActivity {
         if (!validateForm()) {
             return;
         }
-
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
