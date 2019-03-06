@@ -3,6 +3,7 @@ package com.example.android.s4s;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -70,11 +71,16 @@ public class LoginActivity extends AppCompatActivity {
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
+    SharedPreferences sp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        sp = getSharedPreferences("login",
+                MODE_PRIVATE);
 
         // [START initialize_auth]
         // Initialize Firebase Auth
@@ -88,7 +94,6 @@ public class LoginActivity extends AppCompatActivity {
          */
         loginButton = findViewById(R.id.login_button_fb);
         loginButton.setReadPermissions("email", "public_profile");
-
 
 
         /**
@@ -132,6 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
+                        sp.edit().putBoolean("logged", true).apply();
                     }
 
                     @Override
@@ -149,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
+
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
 
@@ -161,6 +168,7 @@ public class LoginActivity extends AppCompatActivity {
         password_layout = findViewById(R.id.layout_login_password);
         login = findViewById(R.id.login_button);
         forgot_password = findViewById(R.id.forgot_password);
+
 
         forgot_password.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -271,6 +279,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(i);
+                                sp.edit().putBoolean("logged", true).apply();
                             } else {
                                 Toast.makeText(LoginActivity.this, "Verify Email Sent.",
                                         Toast.LENGTH_SHORT).show();

@@ -1,6 +1,7 @@
 package com.example.android.s4s;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -42,6 +43,7 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText confirmpassword;
     TextInputLayout name_layout, email_layout, phone_layout, password_layout, confirm_layout;
     Button register;
+    SharedPreferences sp;
 
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
@@ -67,6 +69,12 @@ public class RegistrationActivity extends AppCompatActivity {
         password_layout = findViewById(R.id.layout_password);
         confirm_layout = findViewById(R.id.layout_confirm);
         register = findViewById(R.id.register_button);
+
+        sp = getSharedPreferences("login",MODE_PRIVATE);
+        if(sp.getBoolean("logged",false)){
+            Intent i = new Intent(RegistrationActivity.this, MainActivity.class);
+            startActivity(i);
+        }
 
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -201,7 +209,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             //Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegistrationActivity.this, "Registration failed.",
+                            Toast.makeText(RegistrationActivity.this, "Account Exists Already.",
                                     Toast.LENGTH_SHORT).show();
                         }
 
