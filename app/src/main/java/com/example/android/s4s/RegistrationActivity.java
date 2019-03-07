@@ -78,10 +78,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        Ref_name = database.getReference().child("name");
-        Ref_email = database.getReference().child("email");
-        Ref_phone = database.getReference().child("phone");
-        Ref_password = database.getReference().child("password");
+        Ref_name = database.getReference("User").child("name");
+        Ref_email = database.getReference("User").child("email");
+        Ref_phone = database.getReference("User").child("phone");
+        Ref_password = database.getReference("User").child("password");
 
 
         name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
