@@ -70,8 +70,8 @@ public class RegistrationActivity extends AppCompatActivity {
         confirm_layout = findViewById(R.id.layout_confirm);
         register = findViewById(R.id.register_button);
 
-        sp = getSharedPreferences("login",MODE_PRIVATE);
-        if(sp.getBoolean("logged",false)){
+        sp = getSharedPreferences("login", MODE_PRIVATE);
+        if (sp.getBoolean("logged", false)) {
             Intent i = new Intent(RegistrationActivity.this, MainActivity.class);
             startActivity(i);
         }
@@ -152,10 +152,6 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 createAccount(email.getText().toString(), password.getText().toString());
-                Ref_name.push().setValue(name.getText().toString());
-                Ref_email.push().setValue(email.getText().toString());
-                Ref_phone.push().setValue(phone.getText().toString());
-                Ref_password.push().setValue(password.getText().toString());
             }
         });
 
@@ -172,7 +168,7 @@ public class RegistrationActivity extends AppCompatActivity {
     // [END on_start_check_user]
 
 
-    private void createAccount(String email, String password) {
+    private void createAccount(final String email, final String password) {
         // Log.d(TAG, "createAccount:" + email);
         if (!validateForm()) {
             return;
@@ -190,6 +186,11 @@ public class RegistrationActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(RegistrationActivity.this, "Registration Successful",
                                     Toast.LENGTH_SHORT).show();
+                            //Store in Firebase Database
+                            Ref_name.push().setValue(name.getText().toString());
+                            Ref_email.push().setValue(email);
+                            Ref_phone.push().setValue(phone.getText().toString());
+                            Ref_password.push().setValue(password);
                             // [START send_email_verification]
                             user.sendEmailVerification()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {

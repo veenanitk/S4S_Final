@@ -60,6 +60,8 @@ import java.util.regex.Pattern;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
@@ -77,13 +79,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     // [START declare_auth]
     private FirebaseAuth mAuth;
     // [END declare_auth]
-    SharedPreferences sp;
+    SharedPreferences sp, sp2;
     private GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "LogInActivity";
     private static final int RC_SIGN_IN = 9001;
     SignInButton signInButton;
     private GoogleApiClient mGoogleApiClient;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseDatabase database;
+    private DatabaseReference Ref_name, Ref_email, Ref_phone, Ref_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +100,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
+
+        database = FirebaseDatabase.getInstance();
+        Ref_name = database.getReference("User").child("name");
+        Ref_email = database.getReference("User").child("email");
 
 
         signInButton = findViewById(R.id.sign_in_button);
@@ -178,6 +185,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
                         sp.edit().putBoolean("logged", true).apply();
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user != null) {
+                            String name = user.getDisplayName();
+                            String email = user.getEmail();
+                            Ref_name.push().setValue(name);
+                            Ref_email.push().setValue(email);
+                        }
                     }
 
                     @Override
@@ -195,9 +209,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     }
                 });
 
-
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
 
         /**
          * Declaration and linking of views
@@ -253,20 +264,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-            }
-        };
-
 
         /**
          * When login button is clicked ,
@@ -305,16 +302,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+
     }
     // [END on_start_check_user]
 
     @Override
     public void onStop() {
         super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
+
     }
 
     // [START onactivityresult]
@@ -330,6 +325,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
+                String personName = account.getDisplayName();
+                String personEmail = account.getEmail();
+                Ref_name.push().setValue(personName);
+                Ref_email.push().setValue(personEmail);
                 firebaseAuthWithGoogle(account);
             } else {
                 // Google Sign In failed
@@ -387,7 +386,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                       // Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+                        // Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
@@ -428,6 +427,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     }
                 });
     }
+
 
     private void signIn2(String email, String password) {
         //Log.d(TAG, "signIn:" + email);
@@ -526,6 +526,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 }
         }
     }
+
 
     private Boolean exit = false;
 
