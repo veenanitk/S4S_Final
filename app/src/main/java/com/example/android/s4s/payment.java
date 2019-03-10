@@ -9,12 +9,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Toast;
+import android.content.DialogInterface;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.app.AlertDialog;
+import android.widget.Toast;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
 public class payment extends AppCompatActivity {
     Button confirm;
     Button cancel;
     AlertDialog.Builder builder;
+    private Spinner spinner1;
 
 
     @Override
@@ -33,7 +48,7 @@ public class payment extends AppCompatActivity {
 
 
         confirm = (Button) findViewById(R.id.button);
-        cancel = (Button) findViewById(R.id.button2);
+        cancel = (Button) findViewById(R.id.button1);
         builder = new AlertDialog.Builder(this);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +117,10 @@ public class payment extends AppCompatActivity {
             }
         });
     }
+    public void addListenerOnSpinnerItemSelection() {
+        spinner1 = (Spinner) findViewById(R.id.spinner1);
+        spinner1.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
@@ -113,5 +132,4 @@ public class payment extends AppCompatActivity {
     }
 
 }
-
 

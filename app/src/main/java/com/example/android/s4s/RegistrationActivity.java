@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -19,15 +16,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -46,6 +39,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
     private DatabaseReference Ref_name, Ref_email, Ref_phone, Ref_password;
+    private DatabaseReference Ref_nameA, Ref_emailA, Ref_phoneA, Ref_passwordA;
 
 
     @Override
@@ -70,10 +64,15 @@ public class RegistrationActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        Ref_name = database.getReference().child("name");
-        Ref_email = database.getReference().child("email");
-        Ref_phone = database.getReference().child("phone");
-        Ref_password = database.getReference().child("password");
+        Ref_name = database.getReference("User").child("name");
+        Ref_email = database.getReference("User").child("email");
+        Ref_phone = database.getReference("User").child("phone");
+        Ref_password = database.getReference("User").child("password");
+
+        Ref_nameA = database.getReference("Admin/User").child("name");
+        Ref_emailA = database.getReference("Admin/User").child("email");
+        Ref_phoneA = database.getReference("Admin/User").child("phone");
+        Ref_passwordA = database.getReference("Admin/User").child("password");
 
 
         name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -148,6 +147,11 @@ public class RegistrationActivity extends AppCompatActivity {
                 Ref_email.push().setValue(email.getText().toString());
                 Ref_phone.push().setValue(phone.getText().toString());
                 Ref_password.push().setValue(password.getText().toString());
+
+                Ref_nameA.push().setValue(name.getText().toString());
+                Ref_emailA.push().setValue(email.getText().toString());
+                Ref_phoneA.push().setValue(phone.getText().toString());
+                Ref_passwordA.push().setValue(password.getText().toString());
             }
         });
 

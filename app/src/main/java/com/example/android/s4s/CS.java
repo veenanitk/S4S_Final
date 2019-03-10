@@ -46,10 +46,11 @@ public class CS extends Fragment {
     public void perform(View v) {
 
          ArrayList<Book> books = new ArrayList<Book>();
-        for(int i = 0;i<10;i++)
-        {
-            books.add(new Book("The Lost Symbol","Dan Brown", "Rs.500", "Add",R.drawable.ic_menu_gallery,R.drawable.book_ratings,R.drawable.ic_add_shopping_cart));
+        for(int i=0;i<10;i++) {
+            books.add(new Book("The Lost Symbol", "Dan Brown", "Rs.500", "Add", R.drawable.angelsanddemons, R.drawable.book_ratings, R.drawable.ic_add_shopping_cart));
+            books.add(new Book("Angels and Demons", "Dan Brown", "Rs.625", "Add", R.drawable.book2, R.drawable.book_ratings, R.drawable.ic_add_shopping_cart));
         }
+
 
 
         BookAdapter adapter = new BookAdapter(getActivity(), books);

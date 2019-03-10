@@ -133,5 +133,10 @@ public class addtocart extends AppCompatActivity {
         Intent i = new Intent(addtocart.this, Wishlist.class);
         startActivity(i);
     }
+    public void openMaps(View view)
+    {
+        Intent i = new Intent(addtocart.this, maps.class);
+        startActivity(i);
+    }
 
 }

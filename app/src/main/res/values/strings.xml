@@ -75,5 +75,10 @@
     <string name="title_activity_profile1">Profile1</string>
     <string name="title_activity_profile_edit1">ProfileEdit1</string>
     <string name="title_activity_comp_sci">CompSci</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="google_maps_key">AIzaSyChyJMCyA2r1vzgcAJ47xzENofbdBzN84E</string>
+    <string name="pick_place">Place</string>
+    <string name="default_info_title">Title</string>
+    <string name="default_info_snippet">Info</string>
 
 </resources>
