@@ -14,6 +14,7 @@ android {
 
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -40,7 +41,16 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-database:16.1.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
-
+    implementation 'com.google.firebase:firebase-storage:16.1.0'
+    implementation('net.named-data.jndn-extra:jndn-management:1.2.1') {
+        exclude group: 'net.named-data', module: 'jndn'
+    }
+    implementation('net.named-data:jndn-android:0.17') {
+        exclude group: 'org.xerial'
+        exclude group: 'com.google.android'
+    }
+    //implementation 'com.google.firebase:firebase-storage:16.0.5'
 }
+
 
 apply plugin: 'com.google.gms.google-services'

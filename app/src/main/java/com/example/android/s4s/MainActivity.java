@@ -154,6 +154,11 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
                 break;
 
+            case R.id.my_orders:
+                Intent intent10 = new Intent(this, my_orders.class);
+                startActivity(intent10);
+                break;
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
