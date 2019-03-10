@@ -1,6 +1,7 @@
 package com.example.android.s4s;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -36,6 +37,8 @@ public class RegistrationActivity extends AppCompatActivity {
     TextInputLayout name_layout, email_layout, phone_layout, password_layout, confirm_layout;
     Button register;
 
+    SharedPreferences sp;
+
     private FirebaseDatabase database;
     private FirebaseAuth mAuth;
     private DatabaseReference Ref_name, Ref_email, Ref_phone, Ref_password;
@@ -46,6 +49,16 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        //SharedPreferences for Logout
+        sp = getSharedPreferences("login",
+                MODE_PRIVATE);
+
+        if(sp.getBoolean("logged" ,false))
+        {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
 
         /**
          * Declaration and linking of views
@@ -64,15 +77,12 @@ public class RegistrationActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        Ref_name = database.getReference("User").child("name");
-        Ref_email = database.getReference("User").child("email");
-        Ref_phone = database.getReference("User").child("phone");
-        Ref_password = database.getReference("User").child("password");
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Ref_name = database.getReference("User").child(currentFirebaseUser.getUid()).child("name");
+        Ref_email = database.getReference("User").child(currentFirebaseUser.getUid()).child("email");
+        Ref_phone = database.getReference("User").child(currentFirebaseUser.getUid()).child("phone");
+        Ref_password = database.getReference("User").child(currentFirebaseUser.getUid()).child("password");
 
-        Ref_nameA = database.getReference("Admin/User").child("name");
-        Ref_emailA = database.getReference("Admin/User").child("email");
-        Ref_phoneA = database.getReference("Admin/User").child("phone");
-        Ref_passwordA = database.getReference("Admin/User").child("password");
 
 
         name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -148,10 +158,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 Ref_phone.push().setValue(phone.getText().toString());
                 Ref_password.push().setValue(password.getText().toString());
 
-                Ref_nameA.push().setValue(name.getText().toString());
-                Ref_emailA.push().setValue(email.getText().toString());
-                Ref_phoneA.push().setValue(phone.getText().toString());
-                Ref_passwordA.push().setValue(password.getText().toString());
             }
         });
 

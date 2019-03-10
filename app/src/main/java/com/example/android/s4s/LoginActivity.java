@@ -102,15 +102,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         // [END initialize_auth]
 
         database = FirebaseDatabase.getInstance();
-        Ref_name = database.getReference("User").child("name");
-        Ref_email = database.getReference("User").child("email");
+
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Ref_name = database.getReference("User").child(currentFirebaseUser.getUid()).child("name");
+        Ref_email = database.getReference("User").child(currentFirebaseUser.getUid()).child("email");
 
 
         signInButton = findViewById(R.id.sign_in_button);
         // [START config_signin]
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id2))
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         // [END config_signin]

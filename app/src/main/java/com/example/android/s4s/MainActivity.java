@@ -144,10 +144,6 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent2);
                 break;
 
-            case R.id.my_orders:
-                Intent intent4 = new Intent(this,my_orders.class);
-                startActivity(intent4);break;
-
             case R.id.seller:
                 Intent intent5 = new Intent(this, Seller.class);
                 startActivity(intent5);
