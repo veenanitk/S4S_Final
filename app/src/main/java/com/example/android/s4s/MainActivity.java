@@ -1,6 +1,7 @@
 package com.example.android.s4s;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -18,21 +19,30 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //SharedPreferences for Logout
+        sp = getSharedPreferences("login",
+                MODE_PRIVATE);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         ViewPager Pager = (ViewPager) findViewById(R.id.viewpager);
 
-        tabpagerAdapter Tabpageradapter = new tabpagerAdapter(getSupportFragmentManager(),MainActivity.this);
+        tabpagerAdapter Tabpageradapter = new tabpagerAdapter(getSupportFragmentManager(), MainActivity.this);
         Pager.setAdapter(Tabpageradapter);
         tabLayout.setupWithViewPager(Pager);
 
@@ -49,8 +59,8 @@ public class MainActivity extends AppCompatActivity
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Search=search.getText().toString();
-                if(!TextUtils.isEmpty(Search)) {
+                String Search = search.getText().toString();
+                if (!TextUtils.isEmpty(Search)) {
                     Intent intent = new Intent(MainActivity.this, SearchResults.class);
                     startActivity(intent);
                 }
@@ -66,12 +76,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        assert drawer!=null;
+        assert drawer != null;
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else
-        {
+        } else {
             if (exit) {
                 Intent a = new Intent(Intent.ACTION_MAIN);
                 a.addCategory(Intent.CATEGORY_HOME);
@@ -94,17 +102,12 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
-
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
 
 
         return super.onOptionsItemSelected(item);
@@ -120,7 +123,8 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.notification:
                 Intent intent7 = new Intent(this, Notification.class);
-                startActivity(intent7);                break;
+                startActivity(intent7);
+                break;
             case R.id.tnc:
                 Intent intent1 = new Intent(this, TermsActivity.class);
                 startActivity(intent1);
@@ -132,7 +136,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.logout:
                 Intent intent8 = new Intent(this, LoginActivity.class);
-                startActivity(intent8);                break;
+                startActivity(intent8);
+                sp.edit().putBoolean("logged", false).apply();
+                break;
             case R.id.feedback_form:
                 Intent intent2 = new Intent(this, Feedback.class);
                 startActivity(intent2);
@@ -150,6 +156,11 @@ public class MainActivity extends AppCompatActivity
             case R.id.buyer:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
+                break;
+
+            case R.id.my_orders:
+                Intent intent10 = new Intent(this, my_orders.class);
+                startActivity(intent10);
                 break;
 
         }
@@ -176,8 +187,8 @@ public class MainActivity extends AppCompatActivity
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
-    public void openPayment(View view)
-    {
+
+    public void openPayment(View view) {
         Intent i = new Intent(this, payment.class);
         startActivity(i);
     }
