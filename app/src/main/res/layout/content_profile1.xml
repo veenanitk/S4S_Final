@@ -38,14 +38,16 @@
                         android:layout_height="150dp"
                         android:src="@mipmap/man"/>
                     <TextView
+                        android:id="@+id/profile_name"
                         android:layout_marginTop="10dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="User Name"
-                        android:textColor="#fff"
+                        tools:text="Vasudev"
+                        android:textColor="#ffff"
                         android:textStyle="bold"
-                        android:textSize="21sp"/>
+                        android:textSize="21sp"
+                        />
                 </LinearLayout>
                 <android.support.v7.widget.CardView
                     android:layout_width="400dp"
@@ -70,6 +72,8 @@
                                 android:textSize="20sp"
                                 />
                             <TextView
+                                android:id="@+id/profile_no_of_ads"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="5"
@@ -92,6 +96,8 @@
                                 android:textSize="20sp"
                                 />
                             <TextView
+                                android:id="@+id/profile_balance"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Rs.1205"
@@ -114,6 +120,8 @@
                                 android:textSize="20sp"
                                 />
                             <TextView
+                                android:id="@+id/profile_rating"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="4.5"
@@ -144,12 +152,14 @@
                         android:layout_height="36dp"
                         app:srcCompat="@drawable/ic_email_black_24dp"/>
                     <TextView
+                        android:id="@+id/profile_email"
+
                         android:textStyle="bold"
                         android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="20dp"
-                        android:text="UserName@e-mail.com"/>
+                        tools:text="UserName@e-mail.com"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="25dp"
@@ -162,13 +172,15 @@
                         android:layout_height="36dp"
                         app:srcCompat="@drawable/ic_phone_android_black_24dp"/>
                     <TextView
+                        android:id="@+id/profile_phone"
+
                         android:textStyle="bold"
 
                         android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="20dp"
-                        android:text="+9876543210"/>
+                        tools:text="+9876543210"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_marginTop="25dp"
@@ -181,6 +193,8 @@
                         android:layout_height="36dp"
                         app:srcCompat="@drawable/ic_group_add_black_24dp"/>
                     <TextView
+                        android:id="@+id/profile_city"
+
                         android:textStyle="bold"
 
                         android:layout_gravity="center_vertical"
@@ -200,6 +214,8 @@
                         android:layout_height="36dp"
                         app:srcCompat="@drawable/ic_forum_black_24dp"/>
                     <TextView
+                        android:id="@+id/profile_pincode"
+
                         android:textStyle="bold"
 
                         android:layout_gravity="center_vertical"

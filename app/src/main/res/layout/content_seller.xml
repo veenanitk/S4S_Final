@@ -208,7 +208,7 @@
 
                                     android:id="@+id/frontpic"
 
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
 
                                     android:layout_height="wrap_content"
 
@@ -239,6 +239,17 @@
 
                             </LinearLayout>
 
+                        </android.support.design.widget.TextInputLayout>
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/layout_upload2"
+                            style="@style/TextInputLayoutStyle"
+                            android:layout_marginTop="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:orientation="vertical">
 
                             <!--image display profile pic 2-->
                             <LinearLayout
@@ -253,9 +264,9 @@
 
                                     android:id="@+id/backpic"
 
-                                    android:layout_width="match_parent"
+                                    android:layout_width="wrap_content"
 
-                                    android:layout_height="match_parent"
+                                    android:layout_height="wrap_content"
 
                                     android:src="@drawable/bookstoreicon" />
 
@@ -314,8 +325,9 @@
                                 android:layout_height="45dp"
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="8dp"
-                                android:layout_weight=".5"
-                                android:isIndicator="true" />
+                                android:layout_weight="1"
+                                android:isIndicator="false"
+                                android:visibility="visible" />
                         </android.support.design.widget.TextInputLayout>
 
 

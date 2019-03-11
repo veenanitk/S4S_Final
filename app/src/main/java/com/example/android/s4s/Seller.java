@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -52,7 +53,7 @@ public class Seller extends AppCompatActivity {
     Intent I;
     EditText editText, editText2, editText3, editText4, editText5, editText7, editText8, editText9, editText10,editText11;
     TextInputLayout name_layout, author_layout, phone1_layout, edition_layout, price_layout,publisher_layout,
-            locality_layout, district_layout, state_layout, pincode_layout;
+            locality_layout, district_layout, state_layout, pincode_layout, upload_layout,upload1_layout;
     private DatabaseReference book_name, book_author, book_edition, book_publisher, book_price, book_rating,
             sel_society, sel_district, sel_pincode, sel_phn, sel_state,flag;
 
@@ -63,10 +64,9 @@ public class Seller extends AppCompatActivity {
     ImageView viewImage,viewImage2;
     Button b,b2;
     ////// java class for adding profile photo
-    private Uri selectedImage;
+    private Uri selectedImage,selectedImage1;
 
     ///to store image
-
 
     private FirebaseStorage mstorage;
 
@@ -123,21 +123,24 @@ public class Seller extends AppCompatActivity {
         district_layout = findViewById(R.id.layout_district);
         state_layout = findViewById(R.id.layout_state);
         pincode_layout = findViewById(R.id.layout_pincode);
+        upload_layout = findViewById(R.id.layout_upload1);
+        upload1_layout = findViewById(R.id.layout_upload2);
 
         databasebook=FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        book_name = databasebook.getReference("Seller").child("Book").child("Name");
-        book_author = databasebook.getReference("Seller").child("Book").child("Author's Name");
-        book_edition = databasebook.getReference("Seller").child("Book").child("Book Edition");
-        book_publisher = databasebook.getReference("Seller").child("Book").child("Publisher");
-        book_price = databasebook.getReference("Seller").child("Book").child("Price");
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        book_name = databasebook.getReference("Seller").child(currentFirebaseUser.getUid()).child("Book Name");
+        book_author = databasebook.getReference("Seller").child(currentFirebaseUser.getUid()).child("Author's Name");
+        book_edition = databasebook.getReference("Seller").child(currentFirebaseUser.getUid()).child("Book Edition");
+        book_publisher = databasebook.getReference("Seller").child(currentFirebaseUser.getUid()).child("Publisher");
+        book_price = databasebook.getReference("Seller").child(currentFirebaseUser.getUid()).child("Price");
         //book_rating = databasebook.getReference("Seller").child("Book");
-        sel_society = databasebook.getReference("Seller").child("Address").child("Society");
-        sel_district = databasebook.getReference("Seller").child("Address").child("District");
-        sel_pincode = databasebook.getReference("Seller").child("Address").child("Pincode");
-        sel_state = databasebook.getReference("Seller").child("Address").child("State");
-        sel_phn = databasebook.getReference("Seller").child("Address").child("Contact details");
-        flag = databasebook.getReference("Seller").child("Flag");
+        sel_society = databasebook.getReference("Seller").child(currentFirebaseUser.getUid()).child("Society");
+        sel_district = databasebook.getReference("Seller").child(currentFirebaseUser.getUid()).child("District");
+        sel_pincode = databasebook.getReference("Seller").child(currentFirebaseUser.getUid()).child("Pincode");
+        sel_state = databasebook.getReference("Seller").child(currentFirebaseUser.getUid()).child("State");
+        sel_phn = databasebook.getReference("Seller").child(currentFirebaseUser.getUid()).child("Contact details");
+        flag = databasebook.getReference("Seller").child(currentFirebaseUser.getUid()).child("Flag");
 
         //below content is for placing backbutton in th toolbar
         if(getSupportActionBar()!=null){
@@ -171,7 +174,7 @@ public class Seller extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 i1=2;
-                selectImage ();
+                selectImage1 ();
             }
         });
 
@@ -184,53 +187,52 @@ public class Seller extends AppCompatActivity {
                     name_layout.setError("Name of the book is req");
 
                 }
-                if (editText2.getText().toString().equals("")) {
+                else if (editText2.getText().toString().equals("")) {
                     author_layout.setError("Author's Name is req");
 
                 }
-                if (editText3.getText().toString().equals("")) {
+                else if (editText3.getText().toString().equals("")) {
                     price_layout.setError("Expected price is req");
 
                 }
-                if (editText4.getText().toString().equals("")) {
+                else if (editText4.getText().toString().equals("")) {
                     edition_layout.setError("Edition is req");
 
                 }
-                if (editText5.getText().toString().equals("")) {
+                else if (editText5.getText().toString().equals("")) {
                     publisher_layout.setError("Publisher's name is req");
 
                 }
-                if (editText7.getText().toString().equals("")) {
+                else if (editText7.getText().toString().equals("")) {
                     locality_layout.setError("enter you apartment/society/village name is req");
                 }
-                if (editText8.getText().toString().equals("")) {
+                else if (editText8.getText().toString().equals("")) {
                     district_layout.setError("District name is req");
 
                 }
-                if (editText9.getText().toString().equals("")) {
+                else if (editText9.getText().toString().equals("")) {
                     pincode_layout.setError("Pincode is req");
                 }
-                else {
-                    if (!isValidpincode(editText9)) {
-                        pincode_layout.setError("Pincode is wrong");
+                else if (!isValidpincode(editText9)) {
+                    pincode_layout.setError("Pincode is wrong");
 
-                    }
                 }
 
-                if (editText10.getText().toString().equals("")) {
+
+                else if (editText10.getText().toString().equals("")) {
                     state_layout.setError("State name is req");
 
                 }
-                if (editText11.getText().toString().equals("")) {
+                else if (editText11.getText().toString().equals("")) {
                     phone1_layout.setError("phone no. req");
 
                 }
-                else {
-                    if (!isValidMobile(editText11)) {
-                        phone1_layout.setError("phone no is wrong");
+                else if (!isValidMobile(editText11)) {
+                    phone1_layout.setError("phone no is wrong");
 
-                    }
                 }
+
+
                 if(!editText.getText().toString().equals("") && !editText2.getText().toString().equals("") &&
                         !editText3.getText().toString().equals("") && !editText4.getText().toString().equals("") &&
                         !editText5.getText().toString().equals("") && !editText7.getText().toString().equals("") &&
@@ -246,7 +248,7 @@ public class Seller extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int id) {
                                     finish();
                                     addbook();
-                                    Toast.makeText(getApplicationContext(), "Book is added for the sale!!",
+                                    Toast.makeText(getApplicationContext(), "Book is added for sale!!",
                                             Toast.LENGTH_SHORT).show();
                                     openPayment(findViewById(R.id.button));
                                     finish ();
@@ -256,10 +258,10 @@ public class Seller extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int id) {
                                     //  Action for 'NO' Button
                                     dialog.cancel();
-                                    Toast.makeText(getApplicationContext(), "Order cancelled!!",
+                                    Toast.makeText(getApplicationContext(), "Book is not added for sale!",
                                             Toast.LENGTH_SHORT).show();
                                     Intent i = new Intent(Seller.this, Seller.class);
-                                    startActivity(i);
+
                                 }
                             });
                     AlertDialog alert = builder.create();
@@ -298,33 +300,49 @@ public class Seller extends AppCompatActivity {
 
     }
     private void addbook(){
-        book_name.push().setValue(editText.getText().toString());
-        book_author.push().setValue(editText2.getText().toString());
-        book_edition.push().setValue(editText4.getText().toString());
+        book_name.setValue(editText.getText().toString());
+        book_author.setValue(editText2.getText().toString());
+        book_edition.setValue(editText4.getText().toString());
         //Integer adc = book_edition.push().setValue(Integer.class);
-        book_publisher.push().setValue(editText5.getText().toString());
-        book_price.push().setValue(editText3.getText().toString());
-        sel_society.push().setValue(editText7.getText().toString());
-        sel_district.push().setValue(editText8.getText().toString());
-        sel_pincode.push().setValue(editText9.getText().toString());
-        sel_state.push().setValue(editText10.getText().toString());
-        sel_phn.push().setValue(editText11.getText().toString());
+        book_publisher.setValue(editText5.getText().toString());
+        book_price.setValue(editText3.getText().toString());
+        sel_society.setValue(editText7.getText().toString());
+        sel_district.setValue(editText8.getText().toString());
+        sel_pincode.setValue(editText9.getText().toString());
+        sel_state.setValue(editText10.getText().toString());
+        sel_phn.setValue(editText11.getText().toString());
         int value = 2;
-        flag.push().setValue(value);
+        flag.setValue(value);
 
 
         //3c2
         final ImageView test = (ImageView) findViewById (R.id.frontpic); //image stored here
+        final ImageView test1 = (ImageView) findViewById (R.id.backpic);
         final Bitmap bmap = ((BitmapDrawable) test.getDrawable ()).getBitmap ();
+        final Bitmap bmap1 = ((BitmapDrawable) test1.getDrawable ()).getBitmap ();
         Drawable myDrawable = getResources ().getDrawable (R.drawable.bookstoreicon);
         final Bitmap myLogo = ((BitmapDrawable) myDrawable).getBitmap ();
 
+
         if (bmap.sameAs (myLogo)) {
             //   k--;
-            Toast.makeText (Seller.this, "Add Profile Picture", Toast.LENGTH_SHORT).show ();
+            upload_layout.setError("Photo is req");
 
         } else {
             upload_image ();
+            Toast.makeText (Seller.this, "what the ",Toast.LENGTH_SHORT).show ();
+//                    Intent myIntent = new Intent (seller1.this,
+//                            Negotiator_final.class);
+//                    startActivity (myIntent);
+//                    finish ();
+
+        }
+        if (bmap1.sameAs (myLogo)) {
+            //   k--;
+            upload1_layout.setError("Photo is req");
+
+        } else {
+            upload_image1 ();
             Toast.makeText (Seller.this, "what the ",Toast.LENGTH_SHORT).show ();
 //                    Intent myIntent = new Intent (seller1.this,
 //                            Negotiator_final.class);
@@ -385,6 +403,55 @@ public class Seller extends AppCompatActivity {
 
     }
 
+    private void selectImage1() {
+
+
+        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
+
+
+        AlertDialog.Builder builder1 = new AlertDialog.Builder (Seller.this);
+
+        builder1.setTitle ("Add Photo!");
+
+        builder1.setItems (options, new DialogInterface.OnClickListener () {
+
+            @Override
+
+            public void onClick(DialogInterface dialog, int item) {
+
+                if (options[item].equals ("Take Photo")) {
+
+                    Intent intent = new Intent (MediaStore.ACTION_IMAGE_CAPTURE);
+
+
+                    File f = new File (Environment.getExternalStorageDirectory (), "temp1.jpg");
+
+
+                    intent.putExtra (MediaStore.EXTRA_OUTPUT, Uri.fromFile (f));
+
+                    startActivityForResult (intent, 1);
+
+                } else if (options[item].equals ("Choose from Gallery")) {
+
+                    Intent intent = new Intent (Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+                    startActivityForResult (intent, 2);
+
+
+                } else if (options[item].equals ("Cancel")) {
+
+                    dialog.dismiss ();
+
+                }
+
+            }
+
+        });
+
+        builder1.show ();
+
+    }
+
     @Override
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -398,22 +465,42 @@ public class Seller extends AppCompatActivity {
 
                 File f = new File (Environment.getExternalStorageDirectory ().toString ());
 
-                for (File temp : f.listFiles ()) {
+                if(i1==1) {
+                    for (File temp : f.listFiles()) {
 
-                    if (temp.getName ().equals ("temp.jpg")) {
 
-                        f = temp;
+                        if (temp.getName().equals("temp.jpg")) {
 
-                        // adding new peice of code here
-                        selectedImage =  Uri.fromFile (new File (f.toString ()));
+                            f = temp;
 
-                        ///
+                            // adding new peice of code here
+                            selectedImage = Uri.fromFile(new File(f.toString()));
 
-                        break;
+                            ///
 
+                            break;
+
+                        }
                     }
-
                 }
+                if(i1==2) {
+                    for (File temp1 : f.listFiles()) {
+                        if (temp1.getName().equals("temp1.jpg")) {
+
+                            f = temp1;
+
+                            // adding new peice of code here
+                            selectedImage1 = Uri.fromFile(new File(f.toString()));
+
+                            ///
+
+                            break;
+
+                        }
+                    }
+                }
+
+
 
                 try {
 
@@ -426,7 +513,7 @@ public class Seller extends AppCompatActivity {
 
                     if(i1==1)
                         viewImage.setImageBitmap (bitmap);
-                    else if(i1==2)
+                    if(i1==2)
                         viewImage2.setImageBitmap(bitmap);
 
                     String path = Environment
@@ -476,28 +563,48 @@ public class Seller extends AppCompatActivity {
             } else if (requestCode == 2) {
 
 ///// changed uri selectimage  to global variable
+                if(i1==1) {
 
-                selectedImage = data.getData ();
+                    selectedImage = data.getData();
 
-                String[] filePath = {MediaStore.Images.Media.DATA};
+                    String[] filePath = {MediaStore.Images.Media.DATA};
 
-                Cursor c = getContentResolver ().query (selectedImage, filePath, null, null, null);
+                    Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
 
-                c.moveToFirst ();
+                    c.moveToFirst();
 
-                int columnIndex = c.getColumnIndex (filePath[0]);
+                    int columnIndex = c.getColumnIndex(filePath[0]);
 
-                String picturePath = c.getString (columnIndex);
+                    String picturePath = c.getString(columnIndex);
 
-                c.close ();
+                    c.close();
 
-                Bitmap thumbnail = (BitmapFactory.decodeFile (picturePath));
+                    Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
 
-                Log.w ("pery", picturePath + "");
-                if(i1==1)
-                    viewImage.setImageBitmap (thumbnail);
-                else if (i1==2)
-                    viewImage2.setImageBitmap (thumbnail);
+                    Log.w("pery", picturePath + "");
+                    viewImage.setImageBitmap(thumbnail);
+                }
+                if(i1==2) {
+
+                    selectedImage1 = data.getData();
+
+                    String[] filePath = {MediaStore.Images.Media.DATA};
+
+                    Cursor c = getContentResolver().query(selectedImage1, filePath, null, null, null);
+
+                    c.moveToFirst();
+
+                    int columnIndex = c.getColumnIndex(filePath[0]);
+
+                    String picturePath = c.getString(columnIndex);
+
+                    c.close();
+
+                    Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+
+                    Log.w("pery", picturePath + "");
+                    viewImage2.setImageBitmap(thumbnail);
+                }
 
 
             }
@@ -519,8 +626,9 @@ public class Seller extends AppCompatActivity {
 
     private void upload_image()
     {
-        storageReference = FirebaseStorage.getInstance ().getReference ("Upload");
+        storageReference = FirebaseStorage.getInstance ().getReference ("Front page images");
         databaseReference= FirebaseDatabase.getInstance ().getReference ();
+
         if(selectedImage != null)
         {
             StorageReference mstorage = storageReference.child (System.currentTimeMillis ()+"."+getFileextension (selectedImage));
@@ -557,7 +665,52 @@ public class Seller extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText (Seller.this,"no photo",Toast.LENGTH_SHORT).show ();
+            upload_layout.setError("Photo of the book is req");
+        }
+    }
+
+    private void upload_image1()
+    {
+        storageReference = FirebaseStorage.getInstance ().getReference ("Back page images");
+        databaseReference= FirebaseDatabase.getInstance ().getReference ();
+
+        if(selectedImage1 != null)
+        {
+            StorageReference mstorage = storageReference.child (System.currentTimeMillis ()+"."+getFileextension (selectedImage));
+
+            mstorage.putFile (selectedImage1).addOnSuccessListener (new OnSuccessListener <UploadTask.TaskSnapshot> () {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Handler handler = new Handler ();
+                    handler.postDelayed (new Runnable () {
+                        @Override
+                        public void run() {
+                            Toast.makeText (Seller.this,"image uploaded",Toast.LENGTH_SHORT).show ();
+                        }
+                    },5000);
+
+
+
+                }
+            }).addOnFailureListener (new OnFailureListener () {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText (Seller.this,e.getMessage (),Toast.LENGTH_SHORT).show ();
+
+                }
+            }).addOnProgressListener (new OnProgressListener <UploadTask.TaskSnapshot> () {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    double progress=(100.0 * taskSnapshot.getBytesTransferred () / taskSnapshot.getTotalByteCount ());
+
+                }
+            });
+
+        }
+        else
+        {
+            upload_layout.setError("Photo of the book is req");
         }
     }
 

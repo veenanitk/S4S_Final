@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.android.s4s">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -24,7 +23,6 @@
         android:supportsRtl="true"
         android:theme="@style/HiddenTitleTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -39,7 +37,7 @@
 
         <activity
             android:name=".maps"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".ProfileEdit1"
             android:label="@string/title_activity_profile_edit1"
@@ -87,13 +85,16 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ProfileEdit" />
         <activity android:name=".TermsActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegistrationActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".LoginActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".RegistrationActivity">
+
         </activity>
 
         <meta-data
@@ -127,7 +128,7 @@
             android:label="Search Results" />
         <activity android:name=".Pop" />
         <activity android:name=".MainActivitywish" />
-        <activity android:name=".my_orders"/>
+        <activity android:name=".my_orders" />
     </application>
 
 </manifest>

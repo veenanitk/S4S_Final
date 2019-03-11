@@ -19,22 +19,30 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    SharedPreferences sp;
+    SharedPreferences sp, sp1,sp2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sp2 = getSharedPreferences("uid", MODE_PRIVATE);
+        sp2.getString("getuid", null);
+
         //SharedPreferences for Logout
         sp = getSharedPreferences("login",
                 MODE_PRIVATE);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        sp1 = getSharedPreferences("uid",
+                MODE_PRIVATE);
+        sp1.edit().putString("uid", mAuth.getUid()).apply();
+        String id = sp1.getString("getuid", null);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -138,6 +146,7 @@ public class MainActivity extends AppCompatActivity
                 Intent intent8 = new Intent(this, LoginActivity.class);
                 startActivity(intent8);
                 sp.edit().putBoolean("logged", false).apply();
+
                 break;
             case R.id.feedback_form:
                 Intent intent2 = new Intent(this, Feedback.class);
@@ -158,10 +167,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
                 break;
 
-            case R.id.my_orders:
-                Intent intent10 = new Intent(this, my_orders.class);
-                startActivity(intent10);
-                break;
+
 
         }
 
