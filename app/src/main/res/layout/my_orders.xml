@@ -89,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:background="@color/colorPrimary"
-                        android:text="Move to Wishlist"
+                        android:text="Remove"
                         android:textColor="#FFFFFF" />
 
                 </LinearLayout>
@@ -181,7 +181,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:background="@color/colorPrimary"
-                        android:text="Move to Wishlist"
+                        android:text="Remove"
                         android:textColor="#FFFFFF" />
 
                 </LinearLayout>
@@ -273,7 +273,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:background="@color/colorPrimary"
-                        android:text="Move to Wishlist"
+                        android:text="Remove"
                         android:textColor="#FFFFFF" />
 
                 </LinearLayout>
@@ -364,7 +364,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="right"
                         android:background="@color/colorPrimary"
-                        android:text="Move to Wishlist"
+                        android:text="Remove"
                         android:textColor="#FFFFFF" />
 
                 </LinearLayout>
