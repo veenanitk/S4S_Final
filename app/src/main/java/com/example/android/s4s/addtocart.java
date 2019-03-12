@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 public class addtocart extends AppCompatActivity {
     Button add;
+
     Button buy;
     AlertDialog.Builder builder;
 
