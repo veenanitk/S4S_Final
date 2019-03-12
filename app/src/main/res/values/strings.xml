@@ -79,7 +79,7 @@
     <string name="google_maps_key">AIzaSyChyJMCyA2r1vzgcAJ47xzENofbdBzN84E</string>
     <string name="pp">Place</string>
     <string name="dit">Title</string>
-    <string name="default_web_client_id2">558672191416-4o4rl426sjesiqnb8g419poj1dol3ivt.apps.googleusercontent.com</string>
+    <string name="default_web_client_id2">558672191416–4o4rl426sjesiqnb8g419poj1dol3ivt.apps.googleusercontent.com</string>
     <string name="dis">Info</string>
     <string name="title_activity_regist">Regist</string>
 
@@ -87,5 +87,6 @@
 
 
     <string name="option_get_place">Get place</string>
+
 
 </resources>

@@ -90,6 +90,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             //Ref_email = database.getReference("User").child("email");
             Ref_name = database.getReference("User").child(currentFirebaseUser.getUid()).child("name");
             Ref_email = database.getReference("User").child(currentFirebaseUser.getUid()).child("email");
+
+            sp1.edit().putString("getuid",currentFirebaseUser.getUid()).apply();
         }
         catch (NullPointerException ignored)
         {
