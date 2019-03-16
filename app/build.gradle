@@ -52,6 +52,7 @@ dependencies {
         exclude group: 'org.xerial'
         exclude group: 'com.google.android'
     }
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
     //implementation 'com.google.firebase:firebase-storage:16.0.5'
 
 }
